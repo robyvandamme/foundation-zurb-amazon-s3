@@ -1,0 +1,36 @@
+box: roby/web-frontend-build:0.1
+# Defining the dev pipeline
+dev:
+    steps:
+        - npm-install
+        - plasticine/bower-install@0.0.4
+        - script:
+                 name: rebuild node-sass
+                 code: |
+                     npm rebuild node-sass
+        - script:
+                name: gulp build production
+                code: |
+                    gulp build --production
+# Defining the build pipeline, initially identical to dev
+build:
+    steps:
+        - npm-install
+        - plasticine/bower-install@0.0.4
+        - script:
+                 name: rebuild node-sass
+                 code: |
+                     npm rebuild node-sass
+        - script:
+                name: gulp build production
+                code: |
+                     gulp build --production
+# Sync the dist folder with the S3 bucket
+deploy:
+        steps:
+                - s3sync:
+                        key-id: $AWS_ACCESS_KEY_ID
+                        key-secret: $AWS_SECRET_KEY
+                        bucket-url: $BUCKET
+                        source-dir: dist/
+
