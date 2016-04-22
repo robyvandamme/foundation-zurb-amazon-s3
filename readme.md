@@ -1,4 +1,17 @@
-# ZURB Template
+# ZURB Foundation Amazon S3
+Extended [ZURB Foundation for Sites template](https://github.com/zurb/foundation-zurb-template) to enable automated builds and deployments to [Amazon S3](https://aws.amazon.com/websites/) using [Wercker](http://wercker.com).
+
+## Prerequisites
+- An AWS account (Free)
+- A Werker account (Free)
+
+## Getting started
+- Clone the repository to your machine
+- Create a website on Amazon S3 using the s3-website.template using the AWS CLI
+```aws cloudformation create-stack --stack-name YOUR-STACK-NAME --template-body file:////YOUR-LOCAL-PATH/zurb-foundation-amazon-s3/s3-website.template --parameters ParameterKey=BucketName,ParameterValue=YOUR-BUCKET-NAME ```
+
+
+## ZURB Template
 
 [![devDependency Status](https://david-dm.org/zurb/foundation-zurb-template/dev-status.svg)](https://david-dm.org/zurb/foundation-zurb-template#info=devDependencies)
 

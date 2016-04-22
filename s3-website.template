@@ -1,0 +1,57 @@
+{
+	"AWSTemplateFormatVersion" : "2010-09-09",
+
+	"Description" : "Template to create a publicly accessible S3 bucket configured for website access.",
+
+	"Parameters": {
+		"BucketName": {
+			"Description": "The name of the bucket",
+			"Type": "String"
+		}
+		},
+
+		"Resources" : {
+			"WebSiteBucket" : {
+				"Type" : "AWS::S3::Bucket",
+				"Properties" : {
+					"BucketName" : {
+						"Ref": "BucketName"
+						},
+						"AccessControl" : "PublicRead",
+						"WebsiteConfiguration" : {
+							"IndexDocument" : "index.html",
+							"ErrorDocument" : "error.html"
+						}
+					}
+					},
+					"WebsiteBucketPolicy" : {
+						"Type" : "AWS::S3::BucketPolicy",
+						"Properties" : {
+							"PolicyDocument" : {
+								"Id" : "WebsiteBucketPolicy",
+								"Version": "2012-10-17",
+								"Statement" : [ {
+									"Sid" : "ReadAccess",
+									"Action" : [ "s3:GetObject" ],
+									"Effect" : "Allow",
+									"Resource" : { "Fn::Join" : [
+									"", [ "arn:aws:s3:::", { "Ref" : "BucketName" } , "/*" ]
+									] },
+									"Principal" : "*"
+									} ]
+									},
+									"Bucket" : { "Ref" : "BucketName" }
+								}
+							}
+							},
+							"Outputs" : {
+								"WebsiteURL" : {
+									"Value" : { "Fn::GetAtt" : [ "WebSiteBucket", "WebsiteURL" ] },
+									"Description" : "URL for website hosted on S3"
+									},
+									"S3BucketSecureURL" : {
+										"Value" : { "Fn::Join" : [ "", [ "https://", { "Fn::GetAtt" : [ "WebSiteBucket", "DomainName" ] } ] ] },
+										"Description" : "Name of S3 bucket to hold website content"
+									}
+								}
+							}
