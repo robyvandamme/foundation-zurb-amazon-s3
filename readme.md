@@ -10,9 +10,7 @@ Extended [ZURB Foundation for Sites template](https://github.com/zurb/foundation
 - A [Werker account (Free)](http://wercker.com)
 
 ## Getting started
-- Clone the repository to your machine
-- Create a website on Amazon S3 using the s3-website.template using the AWS CLI
-```aws cloudformation create-stack --stack-name YOUR-STACK-NAME --template-body file:////YOUR-LOCAL-PATH/zurb-foundation-amazon-s3/s3-website.template --parameters ParameterKey=BucketName,ParameterValue=YOUR-BUCKET-NAME ```
+In progress....
 
 
 ## ZURB Template
