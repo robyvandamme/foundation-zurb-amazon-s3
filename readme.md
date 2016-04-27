@@ -3,7 +3,7 @@ Extended [ZURB Foundation for Sites template](https://github.com/zurb/foundation
 
 [![wercker status](https://app.wercker.com/status/4cf6da247317b86af647afbc7e9acddc/m "wercker status")](https://app.wercker.com/project/bykey/4cf6da247317b86af647afbc7e9acddc)
 
-Live website: [http://foundation-zurb-amazon-s3.s3-website-ap-northeast-1.amazonaws.com/](Check the deployed website on S3)
+[Live website](http://foundation-zurb-amazon-s3.s3-website-ap-northeast-1.amazonaws.com/)
 
 ## Prerequisites
 - An [AWS account (Free)](https://aws.amazon.com/free/)
