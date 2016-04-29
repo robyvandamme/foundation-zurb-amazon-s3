@@ -7,11 +7,25 @@ Extended [ZURB Foundation for Sites template](https://github.com/zurb/foundation
 
 ## Prerequisites
 - An [AWS account (Free)](https://aws.amazon.com/free/)
-- A [Werker account (Free)](http://wercker.com)
+- A [Wercker account (Free)](http://wercker.com)
+
+## Additions
+- wercker.yml: configuration for Wercker.
+- s3-website.template: example CloudFormation template to create a stack for the S3 website.
+- s3-sync.policy: example IAM policy to allow syncing to S3.
 
 ## Getting started
-In progress....
-
+1. Create a new build on [Wercker](http://wercker.com) and point it to your repository on GitHub.
+2. Trigger a build.
+3. Create a website on Amazon S3 using the s3-website.template in the root of the repository (replace the YOUR-STACK-NAME, YOUR-LOCAL-PATH and YOUR-BUCKET-NAME with the relevant values). Example using the CLI:
+```aws cloudformation create-stack --stack-name YOUR-STACK-NAME --template-body file:////YOUR-LOCAL-PATH/zurb-foundation-amazon-s3/s3-website.template --parameters ParameterKey=BucketName,ParameterValue=YOUR-BUCKET-NAME ```
+3. Create a new IAM user to allow Wercker to sync to Amazon S3. You will need to add the user’s Access Key ID and Secret Access Key as environment variables in your deploy configuration later on.
+4. Create an IAM policy that allows syncing your website to S3 (example s3-sync.policy in the root of the repository) and attach the policy to the user you created in the previous step.
+6. Create a Deploy for your build. You will need to specify the following variables (declared in the wercker.yml in the root of the repository)
+		- ~AWS_ACCESS_KEY_ID~ (of the IAM user you created in step 3)
+		- ~AWS_SECRET_KEY~ (of the IAM user you created in step 3)
+		- ~BUCKET~ (you website bucket ‘s3://your-bucket-name')
+7. Trigger a Deploy 
 
 ## ZURB Template
 
